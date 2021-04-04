@@ -3,7 +3,7 @@
 	$a = $this->session->userdata('is_login');
 	echo $javasc;
 	$caritanggal = date('Y-m-d');
-	$bulan = date(m);
+	$bulan = date('m');
 ?>
 <div class="box ">
 	<div class="box-body">
@@ -59,7 +59,19 @@
 	<hr>
 	<div class="box-body">
 		<center><h2>Laporan Tahunan</h2></center>
-		
+		<form method="get" action="<?= base_url(); ?>index.php/admin/laporan/laporan_html/cetak_laptahunan.html">
+			<div class="form-row">
+				<table width="100%" border="0" align="center"  >
+					<tr>
+						<td width="170" style="padding-bottom:5px;padding-right:10px;text-align:right">Pilih Bulan Laporan: </td>
+						<td width="70" style="padding-bottom:5px;text-align:right">
+							<input class="form-control" name="tahun" value="<?php echo date('Y');?>" >
+						</td>
+						<td style="padding-bottom:5px;padding-left:10px;text-align:left"><button class="btn btn-flat btn-success"><i class="fa fa-search"></i> Lihat</button></td>
+					</tr>
+				</table>
+			</div>
+		</form>
 	</div>
 	
 </div>

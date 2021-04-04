@@ -78,5 +78,18 @@ class Laporan_html extends Temp {
 		$this->load->view('admin/laporan/lap-bulanan', $record);
 //        $this->load->view('admin/laporan/paper', $data);
     }
+	
+	function cetak_laptahunan() {
+        $tahun = $this->input->get('tahun');
+        $record['bln'] = $bulan;
+        $record['thn'] = $tahun;
+        //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
+        $record['laphar'] = $this->Model_transaksi->get_laptahun($tahun);
+        $record['row_pro'] = $this->Model_setting->get_setProfil();
+		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
+        //var_dump($record);
+		$this->load->view('admin/laporan/lap-tahunan', $record);
+//        $this->load->view('admin/laporan/paper', $data);
+    }
 
 }

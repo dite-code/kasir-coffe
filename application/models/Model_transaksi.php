@@ -64,6 +64,19 @@ aa on aa.kode_order=a.kode_order where YEAR(a.tanggal)='$tahun' and MONTH(a.tang
         }
     }
 	
+	public function get_laptahun($tahun) {
+        $query = $this->db->query("select a.*, b.nama_admin, sum(aa.ttl_pembayaran) as ttl_pembayaran from trans_order a 
+join user b on a.id_user=b.id
+left join (select sum(harga_menu*qty) as ttl_pembayaran, kode_order  from trans_order_detail group by kode_order) 
+aa on aa.kode_order=a.kode_order where YEAR(a.tanggal)='$tahun' group by MONTH(a.tanggal)");
+		
+        if ($query) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+	
     public function get_transOrderDetail($kode_order) {
         $query = $this->db->query("select * from trans_order_detail where kode_order='$kode_order'");
         if ($query) {
