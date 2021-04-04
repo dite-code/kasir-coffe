@@ -1,0 +1,7 @@
+{
+    "require": {
+        "sastrawi/sastrawi": "1.0.2",
+        "phpmailer/phpmailer": "5.2.*",
+        "mpdf/mpdf": "^8.0"
+    }
+}
