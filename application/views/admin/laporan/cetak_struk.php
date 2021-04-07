@@ -21,11 +21,12 @@ $tunai = $row_ord->tunai;
 
 $mpdf = new \Mpdf\Mpdf([
 			'mode' => 'utf-8',
-			'format' => [100, 150],
+			'format' => [80, 80+(count($get_transOrderDetail)*12)],
 			'orientation' => 'P',
-			'margin_top' => 7,
-			'margin_left' => 15,
-			'margin_right' => 15
+			'margin_top' => 5,
+			'margin_bottom' => 5,
+			'margin_left' => 5,
+			'margin_right' => 5
 		]);
 		
 		
@@ -38,7 +39,7 @@ $mpdf = new \Mpdf\Mpdf([
 
 		// This is where your script would normally output the HTML using echo or print
 		?>
-		<table>
+		<table border="0">
 		<tr><td style="text-align:center" colspan="6"><?= $row_pro->nama; ?></td></tr>
 		<tr><td style="text-align:center" colspan="6"><?= $row_pro->alamat; ?></td></tr>
 		<tr><td style="text-align:center" colspan="6"><?= $tanggal. " " . $jam; ?></td></tr>
