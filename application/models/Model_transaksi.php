@@ -52,8 +52,9 @@ aa on aa.kode_order=a.kode_order where a.tanggal='$tgl' order by a.tanggal desc,
     }
     
 	public function get_lapbulan($bulan, $tahun) {
-        $query = $this->db->query("select a.*, b.nama_admin, sum(aa.ttl_pembayaran) as ttl_pembayaran from trans_order a 
+        $query = $this->db->query("select a.*, b.nama_admin, sum(aa.ttl_pembayaran) as ttl_pembayaran, sum(bb.harga) as ttl_belanja from trans_order a 
 join user b on a.id_user=b.id
+left join trans_pengeluaran bb on bb.tanggal=a.tanggal
 left join (select sum(harga_menu*qty) as ttl_pembayaran, kode_order  from trans_order_detail group by kode_order) 
 aa on aa.kode_order=a.kode_order where YEAR(a.tanggal)='$tahun' and MONTH(a.tanggal)='$bulan' group by DAY(a.tanggal)");
 		
