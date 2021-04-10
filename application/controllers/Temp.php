@@ -48,4 +48,20 @@ class Temp extends CI_Controller {
         }
     }
 
+	public function layout_pelayan() {
+        if ($this->session->userdata('is_login')) {
+            $a = $this->session->userdata('is_login');
+            if ($a['level_user'] == 9) {
+                $id['row_pro'] = $this->Model_setting->get_setProfil();
+                $id['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+                $data['head'] = $this->load->view('temp_kasir/head', $id, TRUE);
+                $data['nav'] = $this->load->view('temp_kasir/nav', $id, TRUE);
+                $data['nav_header'] = $this->load->view('temp_kasir/nav_header', $id, TRUE);
+//                $data['nav_header'] = $this->load->view('temp_kasir/nav_header', $id, TRUE);
+                $data['footer'] = $this->load->view('temp_kasir/footer', NULL, TRUE);
+                return $data;
+            } 
+        }
+    }
+
 }

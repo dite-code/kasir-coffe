@@ -24,7 +24,9 @@ date_default_timezone_set('Asia/Jakarta');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://base.polreslangkat.com/kasir_coffe/';
+//$CI_ENVIRONMENT = 'development';
+$env='development';
+$config['base_url'] = 'http://coffeepbb.com/';
 //$config['base_url'] = 'http://192.168.10.32/sipmantap/';
 
 /*
