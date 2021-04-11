@@ -64,6 +64,18 @@
 			}
 		}
 		
+		public function aktifkan_meja($no_meja,$kode_order) {
+			$data['no_meja'] = $no_meja;
+			$data['kode_order'] = $kode_order;
+			$data['id_user'] = 100;
+			$data['tanggal'] = date('Y-m-d');
+			$data['jam'] = date('H:i:s');
+			$data['tunai'] = 0;
+			$this->db->insert('trans_order', $data);
+			return $this->db->affected_rows();
+		}
+		
+		
 		public function get_transOrderJoinUserTgl($tgl_dari, $tgl_sampai) {
 			$query = $this->db->query("select a.*, b.nama_admin, aa.ttl_pembayaran from trans_order a 
 			join user b on a.id_user=b.id

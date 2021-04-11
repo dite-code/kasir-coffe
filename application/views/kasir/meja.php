@@ -1,3 +1,6 @@
+<?php
+	//echo $order_meja->kode_order;
+?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -49,7 +52,7 @@
 									<div class="card-body">
 										<h5 class="card-title"><?= $row->nama_menu; ?></h5>
 									<p class="card-text"><?= number_format($ttl_harga, 0, ',', '.'); ?></li></p>
-									<button type="button" class="btn btn-primary btn-lg col-12" onclick="simpanTrans('<?= $row->kode_menu; ?>','<?= $order_meja->kode_order; ?>')">Tambah</button>
+									<button type="button" class="btn btn-primary btn-lg col-12" onclick="simpanTrans('<?= $row->kode_menu; ?>','<?= $order_meja->kode_order; ?>','<?= $no_meja; ?>')">Tambah</button>
 								</div>
 							</div>
 						</div>
@@ -77,11 +80,12 @@
 <script>
 	load_tbl_menu('<?= $order_meja->kode_order; ?>');
 	
-	function simpanTrans(kode_menu,kode_order) {
+	function simpanTrans(kode_menu,kode_order,no_meja) {
         
 		var posting = $.post('<?= base_url() ?>index.php/transaksi/Trans_order/insertMenuTrans', {
             kode_order: kode_order,
-            kode_menu: kode_menu
+            kode_menu: kode_menu,
+		    no_meja: no_meja
 		});
         posting.done(function (data) {
 			//alert(data);

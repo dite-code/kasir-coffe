@@ -160,6 +160,11 @@
 		function insertMenuTrans() {
 			$kode_menu = $this->input->post('kode_menu');
 			$kode_order = $this->input->post('kode_order');
+			$cekmeja= $this->Model_transaksi->get_transOrder($kode_order);
+			if (is_null($row_krj)) {
+				$no_meja = $this->input->post('no_meja');
+				$tambah_meja= $this->Model_transaksi->aktifkan_meja($no_meja,$kode_order);
+			}
 			$row = $this->Model_master->get_dataMenuWhereKode($kode_menu);
 			$row_krj = $this->Model_transaksi->get_transOrderDetailWhereKd($kode_menu, $kode_order);
 			$qty = 0;

@@ -86,9 +86,10 @@
 			$no_meja = $this->input->get('no_meja');
 			$a = $this->session->userdata('is_login');
 			$caritanggal = date('Y-m-d');
-			$data['meja']=$a['meja'];
-			$data['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+			$data['meja'] = $a['meja'];
+			$data['no_meja'] = $no_meja;
 			$data['order_meja'] = $this->Model_transaksi->cek_meja($no_meja, $caritanggal);
+			if($data['order_meja']->kode_order==null){$data['order_meja']->kode_order="Ord-" . $this->Model_aksi->getGUID();;}
 			$data['get_dataMenuJoinFoto'] = $this->Model_master->get_dataMenuJoinFoto();
             $data['get_dataJenisMenu'] = $this->Model_master->get_dataJenisMenu();
 			$data['order'] = $this->Model_transaksi->get_transOrderDetail($data['order_meja']->kode_order);

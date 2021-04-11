@@ -52,7 +52,7 @@ echo $javasc;
                                 $ttl_pemb_sub = 0;
                                 $ttl_pemb_all = 0;
                                 foreach ($get_transOrderJoinUser as $row) {
-                                    if($row->id_user == $a['id']){
+                                    if(($row->id_user == $a['id']) or ($row->id_user == 100)){
                                     $ttl_pemb = @($row->ttl_pembayaran - ($row->ttl_pembayaran * $row->diskon / 100));
 									$ppn = $row_pro->ppn;
 									$ttl_ppn = @($ttl_pemb * $ppn / 100);
