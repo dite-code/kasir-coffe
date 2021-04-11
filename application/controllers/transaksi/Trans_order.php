@@ -307,6 +307,7 @@
 			$data['tunai'] = $tunai;
 			$data['jam'] = $jam;
 			$data['status'] = $status;
+			$data['id_user'] = $id_user;
 			$query = $this->Model_aksi->update('kode_order', $kode_order, 'trans_order', $data);
 			if ($query) {
 				echo 'true';

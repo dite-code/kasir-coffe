@@ -75,15 +75,20 @@ echo $javasc;
 											if($row->status==""){ ?>
 												<a href="<?= base_url(); ?>index.php/transaksi/Trans_order/edit_transaksi.html?kode_order=<?= $row->kode_order; ?>" 
                                                    class="btn btn-flat btn-xs btn-warning"><i class="fa fa-pencil"></i></a> &nbsp;
+												  <a target="_blank" href="<?= base_url(); ?>index.php/admin/laporan/laporan_html/cetak_bill.html?kode_order=<?= $row->kode_order; ?>" class="btn btn-success btn-xs btn-flat"><i class="fa fa-print"></i> Print</a>
 										<?php
 											}
+											else{
 										?>
                                                 <!--                                            <button class="btn btn-flat btn-sm btn-danger" data-toggle="modal" 
                                                                                                         data-target="#deleteOrder" 
                                                                                                         data-kode_order = "<?= $row->kode_order; ?>"
                                                                                                         data-ket="hapus"><i class="fa fa-trash"></i></button>-->
 												<a target="_blank" href="<?= base_url(); ?>index.php/admin/laporan/laporan_html/cetak_strukOrder.html?kode_order=<?= $row->kode_order; ?>" class="btn btn-success btn-xs btn-flat"><i class="fa fa-print"></i> Print</a>
-                                        </td>
+										<?php
+											}
+										?>
+									   </td>
                                     </tr>
                                     <?php
                                 } }
