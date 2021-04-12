@@ -36,7 +36,7 @@
 				$data['name_page'] = 'Transaksi';
 				$data['name_page_small'] = 'Order';
 				$record['javasc'] = $this->load->view('admin/js', NULL, TRUE);
-				$record['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+				$record['kode_order'] = "PBB-" . $this->Model_aksi->getGUID();
 				$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUsertgl($caritanggal,$caritanggal);
 				$record['caritanggal'] = $caritanggal;
 				$data['content'] = $this->load->view('transaksi/order', $record, TRUE);
@@ -160,6 +160,7 @@
 		function insertMenuTrans() {
 			$kode_menu = $this->input->post('kode_menu');
 			$kode_order = $this->input->post('kode_order');
+			//$kode_order = $this->model_aksi->post('kode_order');
 			$cekmeja= $this->Model_transaksi->get_transOrder($kode_order);
 			if (is_null($row_krj)) {
 				$no_meja = $this->input->post('no_meja');

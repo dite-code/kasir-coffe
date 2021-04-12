@@ -97,7 +97,7 @@ class Laporan_html extends Temp {
         $record['bln'] = $bulan;
         $record['thn'] = $tahun;
         //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
-        $record['laphar'] = $this->Model_transaksi->get_laptahun($tahun);
+        $record['laptahun'] = $this->Model_transaksi->get_laptahun($tahun);
         $record['row_pro'] = $this->Model_setting->get_setProfil();
 		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
         //var_dump($record);

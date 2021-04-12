@@ -1,5 +1,5 @@
 <?php
-	//echo $order_meja->kode_order;
+	echo $order_meja->kode_order;
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,17 +12,18 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="<?= base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<title>Pelayan</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-light bg-light sticky-top">
 			<div class="container-fluid">
 				<button class="btn btn-outline-warning" onclick="window.history.back()">Kembali</button>
-				<form class="d-flex">
-					
+				<!--
+					<form class="d-flex">		
 					<button class="btn btn-outline-success" type="submit">Simpan</button>
-				</form>
+					</form>
+				-->
 			</div>
 		</nav>
 		<div id="keranjang">
@@ -40,7 +41,20 @@
 		<div class="tab-content" id="myTabContent">
 			<?php $i=0; foreach ($get_dataJenisMenu as $row_jns) { ?>
 				<div class="tab-pane fade <?php if($i==0){echo " show active ";}?>" id="id-<?= $row_jns->id; ?>" role="tabpanel" aria-labelledby="<?= $row_jns->id; ?>-tab">
-					<div class="row row-cols-1 row-cols-sm-3 m-3 g-4">
+					<div class="col-12 p-3">
+						<input class="form-control" id="Input-<?= $row_jns->id; ?>" type="text" placeholder="Search..">
+					</div>
+					<script>
+						$(document).ready(function(){
+							$("#Input-<?= $row_jns->id; ?>").on("keyup", function() {
+								var value = $(this).val().toLowerCase();
+								$("#itemlist-<?= $row_jns->id; ?> div").filter(function() {
+									$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+								});
+							});
+						});
+					</script>
+					<div class="row row-cols-1 row-cols-sm-3 m-3 g-4" id="itemlist-<?= $row_jns->id; ?>">
 						<?php foreach ($get_dataMenuJoinFoto as $row) { 
 							$ttl_harga = @($row->harga_menu - ($row->harga_menu * $row->diskon_menu / 100));
 							if ($row_jns->id==$row->id_jenis_menu){
@@ -56,8 +70,8 @@
 								</div>
 							</div>
 						</div>
-						
 						<?php }}?>
+						
 				</div>
 			</div>
 		<?php $i++;} ?>
@@ -68,7 +82,8 @@
 	
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	
 	<!-- Option 2: Separate Popper and Bootstrap JS -->
 	<!--
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
@@ -116,4 +131,4 @@
 		});
 	}
 	
-	</script>				
+	</script>							

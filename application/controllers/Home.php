@@ -52,7 +52,7 @@
 					//                $data['name_page'] = 'ada';
 					//                $data['name_page_small'] = 'Kasir';
 					$record['javasc'] = $this->load->view('kasir/js', NULL, TRUE);
-					$record['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+					$record['kode_order'] = "PBB-" . $this->Model_aksi->getGUID();
 					$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUsertgl($caritanggal,$caritanggal);
 					$record['caritanggal'] = $caritanggal;
 					$data['content'] = $this->load->view('kasir/baranda', $record, TRUE);
@@ -71,13 +71,13 @@
 			'id' => '100',
 			'level_user' => '9',
 			'nm_level' => 'pelayan',
-			'meja' => '10'
+			'meja' => '20'
 			);
 			$this->session->set_userdata('is_login', $log);
 			$a = $this->session->userdata('is_login');
 			$caritanggal = date('Y-m-d');
 			$data['meja']=$a['meja'];
-			$data['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+			$data['kode_order'] = "PBB-" . $this->Model_aksi->getGUID();
 			$data['mejaAktif'] = $this->Model_transaksi->cek_meja_kosong($caritanggal,$caritanggal);
 			$this->load->view('kasir/pelayan', $data);			
 		}
@@ -89,7 +89,7 @@
 			$data['meja'] = $a['meja'];
 			$data['no_meja'] = $no_meja;
 			$data['order_meja'] = $this->Model_transaksi->cek_meja($no_meja, $caritanggal);
-			if($data['order_meja']->kode_order==null){$data['order_meja']->kode_order="Ord-" . $this->Model_aksi->getGUID();;}
+			if($data['order_meja']->kode_order==null){$data['order_meja']->kode_order="PBB-" . $this->Model_aksi->getGUID($no_meja);;}
 			$data['get_dataMenuJoinFoto'] = $this->Model_master->get_dataMenuJoinFoto();
             $data['get_dataJenisMenu'] = $this->Model_master->get_dataJenisMenu();
 			$data['order'] = $this->Model_transaksi->get_transOrderDetail($data['order_meja']->kode_order);
