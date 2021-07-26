@@ -23,6 +23,23 @@ class Master extends Temp {
         $this->load->model('Model_aksi');
         $this->load->model('Model_master');
     }
+	
+	public function jenis_olahan() {
+        if ($this->session->userdata('is_login')) {
+            $a = $this->session->userdata('is_login');
+            if ($a['level_user'] == 1) {
+                $data = $this->layout_admin();
+                $data['name_page'] = 'Administrator';
+                $data['name_page_small'] = 'Menu';
+                $record['get_dataJenisMenu'] = $this->Model_master->get_dataJenisMenu();
+                $record['javasc'] = $this->load->view('admin/js', NULL, TRUE);
+                $data['content'] = $this->load->view('admin/master/jenis_olahan', $record, TRUE);
+                $this->load->view('temp_admin/layout', $data);
+            } else {
+                redirect('login');
+            }
+        }
+    }
 
     public function jenis_menu() {
         if ($this->session->userdata('is_login')) {
@@ -112,7 +129,7 @@ class Master extends Temp {
         $id = $this->input->post('id');
         $path = '././assets/img/menu/';
         @unlink($path . $imageName);
-        $query = $this->Model_aksi->delete('id', $id, 'data_menu_foto');
+        $query = $this->Model_aksi->deletefoto('id', $id, 'data_menu_foto');
         if ($query) {
             $this->session->set_flashdata('tipe', 'alert-success');
             $this->session->set_flashdata('msg', 'Berhasil Menghapus Foto');
@@ -154,6 +171,7 @@ class Master extends Temp {
         $data['id_jenis_menu'] = $this->input->post('id_jenis_menu');
         $data['nama_menu'] = $this->input->post('nama_menu');
         $data['diskon_menu'] = $this->input->post('diskon_menu');
+        $data['satuan'] = $this->input->post('satuan');
         $data['harga_menu'] = str_replace('.', '', $this->input->post('harga_menu'));
         $qry = $this->Model_aksi->update('kode_menu',$kode_menu,'data_menu', $data);
         if ($qry) {
@@ -162,6 +180,8 @@ class Master extends Temp {
             echo 'false';
         }
     }
+	
+	
     function deleteMenu() {
         $kode_menu = $this->input->post('kode_menu');
         $qry = $this->Model_aksi->delete('kode_menu', $kode_menu,'data_menu');
@@ -205,7 +225,20 @@ class Master extends Temp {
             echo json_encode($no);
         }
     }
+	
+	function ganti_olahan() {
+        $id = $this->input->post('id_jenis_menu');
+        $jenis_olahan = $this->input->post('jenis_olahan');
+        $data['jenis_olahan'] = $jenis_olahan;
+        $query = $this->Model_aksi->update('id', $id, 'data_jenis_menu', $data);
+        if ($query) {
+            echo "1";
+        } else {
+            echo "0";
+        }
+    }
 
+	
     function lihat_menu() {
         $id_jenis_menu = $this->input->post('id_jenis_menu');
         $record['get_dataMenuWhereJenis'] = $this->Model_master->get_dataMenuWhereJenis($id_jenis_menu);

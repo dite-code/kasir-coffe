@@ -176,6 +176,8 @@ echo $javasc
                                     <span class="input-group-addon bg-gray-active">Rp.</span>
                                     <input type="text" class="form-control text-right uang harga" id='harga' name="harga"  placeholder="Harga">
                                     <span class="input-group-addon bg-gray-active">,00</span>
+									<input type="hidden" id="saldo" class="form-control" name="saldo" value="<?= $saldo; ?>">
+									<input type="hidden" class="lastharga" id="lastharga" class="form-control" name="lastharga">
                                 </div>
                             </div>
                         </div>
@@ -219,7 +221,8 @@ echo $javasc
         } else if (ket == 'edit') {
             modal.find('#editlabel').html('<b>Form Edit Pengeluaran</b>');
             modal.find('.modal-body input.id').val(id).removeAttr('readonly', 'readonly');
-            modal.find('.modal-body input.harga').val(harga).removeAttr('readonly', 'readonly');
+            modal.find('.modal-body input.harga').val(harga.toLocaleString("id-ID")).removeAttr('readonly', 'readonly');
+            modal.find('.modal-body input.lastharga').val(harga);
             modal.find('.modal-body input.tanggal').val(tanggal).removeAttr('readonly', 'readonly');
             modal.find('.modal-body input.nama_belanja').val(nama_belanja).removeAttr('readonly', 'readonly');
             modal.find('.submit').html('<button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Edit</button>');

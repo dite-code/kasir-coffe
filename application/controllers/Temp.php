@@ -16,6 +16,7 @@ class Temp extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Model_setting');
+		$this->load->model('Model_transaksi');
     }
 
     public function layout_admin() {
@@ -37,13 +38,16 @@ class Temp extends CI_Controller {
             $a = $this->session->userdata('is_login');
             if ($a['level_user'] == 2) {
                 $id['row_pro'] = $this->Model_setting->get_setProfil();
-                $id['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
-                $data['head'] = $this->load->view('temp_kasir/head', $id, TRUE);
+                $id['kode_order'] = "PBB-" . $this->Model_aksi->getGUID();
+                //$record['last_serah_terima'] = $this->Model_transaksi->last_serah_terima();
+				//$id['saldo']=$record['last_serah_terima']->sisasaldo;
+				$id['saldo']=$id['row_pro']->saldo;
+				$data['head'] = $this->load->view('temp_kasir/head', $id, TRUE);
                 $data['nav'] = $this->load->view('temp_kasir/nav', $id, TRUE);
                 $data['nav_header'] = $this->load->view('temp_kasir/nav_header', $id, TRUE);
 //                $data['nav_header'] = $this->load->view('temp_kasir/nav_header', $id, TRUE);
-                $data['footer'] = $this->load->view('temp_kasir/footer', NULL, TRUE);
-                return $data;
+                $data['footer'] = $this->load->view('temp_kasir/footer', $id, TRUE);
+				return $data;
             } 
         }
     }
@@ -53,7 +57,7 @@ class Temp extends CI_Controller {
             $a = $this->session->userdata('is_login');
             if ($a['level_user'] == 9) {
                 $id['row_pro'] = $this->Model_setting->get_setProfil();
-                $id['kode_order'] = "Ord-" . $this->Model_aksi->getGUID();
+                $id['kode_order'] = "PBB-" . $this->Model_aksi->getGUID();
                 $data['head'] = $this->load->view('temp_kasir/head', $id, TRUE);
                 $data['nav'] = $this->load->view('temp_kasir/nav', $id, TRUE);
                 $data['nav_header'] = $this->load->view('temp_kasir/nav_header', $id, TRUE);

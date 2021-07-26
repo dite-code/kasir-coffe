@@ -56,17 +56,20 @@ echo $javasc
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label >Alamat</label>
-                            <textarea class="form-control" name="alamat" rows="3"><?= $row_pro->alamat; ?></textarea>
+                            <label >Jumlah Meja</label>
+                            <input type='text' name='jml_meja' class="form-control" value="<?= $row_pro->jml_meja; ?>" placeholder="Jumlah Meja" >
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon bg-gray-active">Pajak (PPN)</span>
-                                <input type="text" class="form-control text-right ppn" id='ppn' name="ppn"  value="<?= $row_pro->ppn; ?>" placeholder="PPN">
-                                <span class="input-group-addon bg-gray-active">%</span>
-                            </div>
+                        <div class="form-group">
+                            <label >Saldo</label>
+                            <input type='text' name='saldo' class="form-control uang" value="<?= $row_pro->saldo; ?>" >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >Alamat</label>
+                            <textarea class="form-control" name="alamat" rows="3"><?= $row_pro->alamat; ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -75,6 +78,15 @@ echo $javasc
                             <textarea class="form-control" name="catatan_kaki" rows="3"><?= $row_pro->catatan_kaki; ?></textarea>
                         </div>
                     </div>
+					<div class="col-md-6">
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon bg-gray-active">Pajak (PPN)</span>
+                                <input type="text" class="form-control text-right ppn" id='ppn' name="ppn"  value="<?= $row_pro->ppn; ?>" placeholder="PPN">
+                                <span class="input-group-addon bg-gray-active">%</span>
+                            </div>
+                        </div>
+					</div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">

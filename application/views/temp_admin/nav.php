@@ -58,8 +58,9 @@ $nama_admin = $a['nama_admin'];
                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
+				<li class=""><a href="<?= base_url();?>index.php/admin/Master/Jenis_olahan.html"> <i class="fa fa-circle-thin"></i><span> Data Jeis Olahan</span></a></li>
                 <li class=""><a href="<?= base_url();?>index.php/admin/Master/jenis_menu.html"> <i class="fa fa-circle-thin"></i><span> Data Jenis Menu</span></a></li>
-                <li class=""><a href="<?= base_url();?>index.php/admin/Master/menu.html"> <i class="fa fa-circle-thin"></i><span> Data Menu</span></a></li>
+				<li class=""><a href="<?= base_url();?>index.php/admin/Master/menu.html"> <i class="fa fa-circle-thin"></i><span> Data Menu</span></a></li>
             </ul>
         </li>
         <li class=""><a href="<?= base_url();?>index.php/admin/laporan/Laporan_html.html"> <i class="fa fa-file-archive-o"></i><span> Laporan</span></a></li>

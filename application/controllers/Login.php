@@ -45,6 +45,7 @@ class Login extends Temp {
                     'is_active' => $row->is_active,
                     'foto' => $row->foto,
                     'no_telpon' => $row->no_telpon,
+                    'saldo' => $row->saldo,
                     'email' => $row->email
                 );
                 $this->session->set_userdata('is_login', $data);

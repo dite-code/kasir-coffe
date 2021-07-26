@@ -92,6 +92,8 @@ class Setting extends Temp {
         $no_telpon = $this->input->post('no_telpon');
         $alamat = addslashes($this->input->post('alamat'));
         $kota = $this->input->post('kota');
+		$jml_meja = $this->input->post('jml_meja');
+        $saldo = $this->input->post('saldo');
         $catatan_kaki = addslashes($this->input->post('catatan_kaki'));
         $ppn = $this->input->post('ppn');
         $img = $this->input->post('img');
@@ -108,6 +110,8 @@ class Setting extends Temp {
         $data['nama'] = $nama;
         $data['no_telpon'] = $no_telpon;
         $data['kota'] = $kota;
+        $data['jml_meja'] = $jml_meja;
+        $data['saldo'] = str_replace('.', '', $saldo);
         $query = $this->Model_aksi->update('id', $id, 'profil', $data);
         if ($query) {
             $this->session->set_flashdata('tipe', 'alert-success');

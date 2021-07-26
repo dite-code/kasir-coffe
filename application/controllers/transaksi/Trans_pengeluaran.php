@@ -56,19 +56,24 @@ class Trans_pengeluaran extends Temp {
     }
 
     public function insertPengeluaran() {
-        $data['tanggal'] = $this->input->post('tanggal');
+        $saldo = $this->input->post('saldo');
+		$data['tanggal'] = $this->input->post('tanggal');
         $data['harga'] = str_replace('.', '', $this->input->post('harga'));
         $data['id_user'] = $this->input->post('id_user');
         $data['nama_belanja'] = $this->input->post('nama_belanja');
         $query = $this->Model_aksi->insert('trans_pengeluaran', $data);
         if ($query) {
             echo 'true';
+			$profil['saldo'] = $saldo-$data['harga'];
+			$tambahsaldo = $this->Model_aksi->update('id', 1,'profil', $profil);
         } else {
             echo 'false';
         }
     }
     
     public function updatePengeluaran() {
+        $saldo = $this->input->post('saldo');
+		$lastharga = $this->input->post('lastharga');
         $id = $this->input->post('id');
         $data['tanggal'] = $this->input->post('tanggal');
         $data['harga'] = str_replace('.', '', $this->input->post('harga'));
@@ -77,15 +82,21 @@ class Trans_pengeluaran extends Temp {
         $query = $this->Model_aksi->update('id',$id,'trans_pengeluaran', $data);
         if ($query) {
             echo 'true';
+			$profil['saldo'] = $saldo+$lastharga-$data['harga'];
+			$tambahsaldo = $this->Model_aksi->update('id', 1,'profil', $profil);
         } else {
             echo 'false';
         }
     }
     public function deletePengeluaran() {
-        $id = $this->input->post('id');
+        $saldo = $this->input->post('saldo');
+		$harga = str_replace('.', '', $this->input->post('harga'));
+		$id = $this->input->post('id');
         $query = $this->Model_aksi->delete('id',$id,'trans_pengeluaran');
         if ($query) {
             echo 'true';
+			$profil['saldo'] = $saldo+$harga;
+			$tambahsaldo = $this->Model_aksi->update('id', 1,'profil', $profil);
         } else {
             echo 'false';
         }

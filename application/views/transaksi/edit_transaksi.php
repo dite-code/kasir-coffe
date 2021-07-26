@@ -40,6 +40,7 @@ $tunai = $row_ord->tunai;
                             <td width="5%">:</td>
                             <td><?= $kode_order; ?>
                                 <input type="hidden" id="kode_order" class="form-control" name="kode_order" value="<?= $kode_order; ?>">
+								<input type="hidden" id="saldo" class="form-control" name="saldo" value="<?= $saldo; ?>">
                             </td>
                         </tr>
                         <tr>
@@ -172,6 +173,7 @@ $tunai = $row_ord->tunai;
                                         <th class="text-center"  colspan="4">T o t a l</th>
                                         <th class="text-right"  ><div class="ttlHarga"><span class="pull-left">Rp. </span><?= number_format($ttl_ppn_pem, 2, ',', '.'); ?></div></th>
                                         <th class="text-center"  width="8%"></th>
+										<input type="hidden" id="totalbayar" class="form-control" name="totalbayar" value="<?= $ttl_ppn_pem; ?>">
                                     </tr>
                                     <tr>
                                         <th class="text-center"  colspan="4">Kembalian</th>
@@ -243,15 +245,17 @@ $tunai = $row_ord->tunai;
                 <h4 class="modal-title" id="editlabel"></h4>
             </div>
             <form id="form_jenis_menu">
-                <div class="modal-body">
-                    <div class="hapusHidden">
-                        <p>Klik Print Untuk Melanjutkan memprint Faktor pembelian</p>
-                        <p>Klik Kembali Untuk Kembali Ke menu Order</p>
-
-                    </div>
-                </div>
+            <div class="modal-body">
+				<iframe 
+				src="../sample.pdf" id="myFrame" 
+				frameborder="0" style="border:0;" 
+                width="100%" height="500">
+				</iframe>
+			</div>
         </div>
+		
         <div class="modal-footer bg-gray-active">
+		<!--
             <?php if ($a['level_user'] == 1) { ?>
                 <a href="<?= base_url(); ?>index.php/transaksi/Trans_order.html" 
                    class="btn btn-flat btn-sm btn-danger"><i class="fa fa-backward"></i> Kembali</a>
@@ -260,7 +264,8 @@ $tunai = $row_ord->tunai;
                    class="btn btn-flat btn-sm btn-danger"><i class="fa fa-backward"></i> Kembali</a>
 <?php } ?>
             <a target="_blank" href="<?= base_url(); ?>index.php/admin/laporan/laporan_html/cetak_strukOrder.html?kode_order=<?= $kode_order; ?>" class="btn btn-success btn-flat"><i class="fa fa-print"></i> Print</a>
-        </div>
+        -->
+		</div>
         </form>
     </div>
 </div>
@@ -309,8 +314,15 @@ $tunai = $row_ord->tunai;
 	}
 
     function showModalPrint(kode_order) {
+		url = "<?= base_url(); ?>index.php/admin/laporan/laporan_html/cetak_strukOrder.html?kode_order="+kode_order;
+		document.getElementById('myFrame').src = url;
+		var objFra = document.getElementById('myFrame');
         $('#print_order').modal('toggle');
     }
+	
+	$('#print_order').on('hidden.bs.modal', function (e) {
+		window.location.assign("<?= base_url(); ?>")
+	})
 
     function filter_menu(id_jenis_menu) {
         $.ajax({

@@ -43,6 +43,7 @@
 	<tr><td style="text-align:center" colspan="6"><?= Tgl_indo::indo($tgl); ?></td></tr>
 </table>
 <br>
+<h3>Pendapatan</h3>
 <table width="100%" border="1" style="border-collapse:collapse;">
 	<tr>
 		<th>No</th>
@@ -82,6 +83,36 @@
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb, 0, ',', '.'); ?></td>
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_ppn, 0, ',', '.'); ?></td>
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb+$ttl_ppn, 0, ',', '.'); ?></td>
+	</tr>
+</table>
+<br>
+<h3>Pengeluaran</h3>
+<table width="100%" border="1" style="border-collapse:collapse;">
+	<tr>
+		<th>No</th>
+		<th>Kasir</th>
+		<th>Nama Belanja</th>
+		<th>Harga</th>
+	</tr>
+	<?php
+		$no = 1;
+        $ttl_pemb = 0;
+        foreach ($lapharout as $row) {
+			$ttl_pemb += $row->harga;
+	?>
+		<tr>
+			<td align="center"><?= $no++; ?>.</td>
+			<td style="padding-left:5px;"><?= $row->nama_admin; ?></td>
+			<td style="padding-left:5px;"><?= $row->nama_belanja; ?></td>
+			<td style="padding-right:5px;" align="right"><?= number_format($row->harga, 0, ',', '.'); ?></td>
+		</tr>
+		
+		<?php 
+		}
+	?>
+	<tr>
+		<td style="padding-left:5px;" colspan="3">Jumlah ---------------------------------------------------------------</td>
+		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb, 0, ',', '.'); ?></td>
 	</tr>
 </table>
 <?php

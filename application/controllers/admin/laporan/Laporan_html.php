@@ -42,12 +42,66 @@ class Laporan_html extends Temp {
             }
         }
     }
+	
+	function tesmpdf() {
+        $this->load->view('admin/laporan/tesmpdf');
+	}
     
-    function cetak_bill() {
+    function cetak_rekap() {
+        $record['tgl'] = $this->input->get('tanggal');
+        $record['kasir'] = $this->input->get('kasir');
+        $record['pendapatan'] = $this->input->get('pendapatan');
+        $record['pengeluaran'] = $this->input->get('pengeluaran');
+        $record['row_pro'] = $this->Model_setting->get_setProfil();
+		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
+        //var_dump($record);
+		$this->load->view('admin/laporan/cetak_rekap', $record);
+//        $this->load->view('admin/laporan/paper', $data);
+    }
+	
+	function cetak_bill_semua() {
         $kode_order = $this->input->get('kode_order');
         $record['kode_order'] = $kode_order;
         //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
         $record['get_transOrderDetail'] = $this->Model_transaksi->get_transOrderDetail($kode_order);
+		$record['get_transOrderDetail_dapur'] = $this->Model_transaksi->get_transOrderDetail_dapur($kode_order);
+        $record['get_transOrderDetail_bar'] = $this->Model_transaksi->get_transOrderDetail_bar($kode_order);
+        $record['row_pro'] = $this->Model_setting->get_setProfil();
+		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
+        //var_dump($record);
+		$this->load->view('admin/laporan/cetak_bill_semua', $record);
+//        $this->load->view('admin/laporan/paper', $data);
+    }
+	
+	function cetak_bill() {
+        $kode_order = $this->input->get('kode_order');
+        $record['kode_order'] = $kode_order;
+        //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
+        $record['get_transOrderDetail'] = $this->Model_transaksi->get_transOrderDetail($kode_order);
+		$record['row_pro'] = $this->Model_setting->get_setProfil();
+		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
+        //var_dump($record);
+		$this->load->view('admin/laporan/cetak_bill', $record);
+//        $this->load->view('admin/laporan/paper', $data);
+    }
+	
+	function cetak_bill_dapur() {
+        $kode_order = $this->input->get('kode_order');
+        $record['kode_order'] = $kode_order;
+        //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
+        $record['get_transOrderDetail'] = $this->Model_transaksi->get_transOrderDetail_dapur($kode_order);
+        $record['row_pro'] = $this->Model_setting->get_setProfil();
+		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
+        //var_dump($record);
+		$this->load->view('admin/laporan/cetak_bill', $record);
+//        $this->load->view('admin/laporan/paper', $data);
+    }
+	
+	function cetak_bill_bar() {
+        $kode_order = $this->input->get('kode_order');
+        $record['kode_order'] = $kode_order;
+        //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
+        $record['get_transOrderDetail'] = $this->Model_transaksi->get_transOrderDetail_bar($kode_order);
         $record['row_pro'] = $this->Model_setting->get_setProfil();
 		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
         //var_dump($record);
@@ -72,6 +126,7 @@ class Laporan_html extends Temp {
         $record['tgl'] = $tanggal;
         //$record['get_transOrderJoinUser'] = $this->Model_transaksi->get_transOrderJoinUser();
         $record['laphar'] = $this->Model_transaksi->get_laphar($tanggal);
+        $record['lapharout'] = $this->Model_transaksi->get_lapharout($tanggal);
         $record['row_pro'] = $this->Model_setting->get_setProfil();
 		$record['row_ord'] = $this->Model_transaksi->get_transOrder($kode_order);
         //var_dump($record);

@@ -300,6 +300,8 @@
 			$id_user = $this->input->post('id_user');
 			$diskon = $this->input->post('diskon_order');
 			$ppn = $this->input->post('ppn');
+			$saldo = $this->input->post('saldo');
+			$totalbayar = $this->input->post('totalbayar');
 			$tunai = str_replace('.', '', $this->input->post('tunai'));
 			$status = "dibayar";
 			$data['diskon'] = $diskon;
@@ -315,6 +317,8 @@
 				} else {
 				echo 'gagal';
 			}
+			$profil['saldo'] = $saldo+$totalbayar;
+			$tambahsaldo = $this->Model_aksi->update('id', 1,'profil', $profil);
 		}
 		
 		function deleteOrder() {

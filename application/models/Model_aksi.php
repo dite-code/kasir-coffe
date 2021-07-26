@@ -73,8 +73,23 @@
 		}
 		
 		
+		/*
+		public function delete($column, $id, $table) {
+			$this->db->where($column, $id);
+			$this->db->delete($table);
+			return $this->db->affected_rows();
+		}
+		*/
 		
 		public function delete($column, $id, $table) {
+			//update $table set $data where $column = $id;
+			$data['is_deleted'] = 1;
+			$this->db->where($column, $id);
+			$this->db->update($table, $data);
+			return $this->db->affected_rows();
+		}
+		
+		public function deletefoto($column, $id, $table) {
 			$this->db->where($column, $id);
 			$this->db->delete($table);
 			return $this->db->affected_rows();

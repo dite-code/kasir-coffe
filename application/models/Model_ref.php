@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_ref extends CI_Model {
     
     public function get_refLevelUser() {
-        $query = $this->db->query("select * from user_level");
+        $query = $this->db->query("select * from user_level where id>0 and  id<10");
         if ($query) {
             return $query->result();
         } else {

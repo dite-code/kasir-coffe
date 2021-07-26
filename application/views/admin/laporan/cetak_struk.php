@@ -21,7 +21,7 @@ $tunai = $row_ord->tunai;
 
 $mpdf = new \Mpdf\Mpdf([
 			'mode' => 'utf-8',
-			'format' => [80, 80+(count($get_transOrderDetail)*12)],
+			'format' => [80, 100+(count($get_transOrderDetail)*12)],
 			'orientation' => 'P',
 			'margin_top' => 5,
 			'margin_bottom' => 5,
@@ -59,15 +59,15 @@ $mpdf = new \Mpdf\Mpdf([
             $ttl_pemb += $sub_ttl;
             ?>
 			<tr>
-				<td><?= $no++; ?>.</td>
+				<td width="10"><?= $no++; ?>.</td>
 				<td colspan="5"><?= $row->nama_menu; ?></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td> <?= $row->qty; ?></td>
-				<td> x </td>
-				<td><span class="pull-left">Rp. </span><?= number_format($row->harga_menu, 0, ',', '.'); ?></td>
-				<td> = Rp. </td>
+				<td><?= $row->qty; ?></td>
+				<td>x</td>
+				<td width="90"><span class="pull-left">Rp. </span><?= number_format($row->harga_menu, 0, ',', '.'); ?></td>
+				<td>=Rp. </td>
 				<td style="text-align:right"><?= number_format($sub_ttl, 0, ',', '.'); ?></td>
 			</tr>
 		<?php 
@@ -75,17 +75,29 @@ $mpdf = new \Mpdf\Mpdf([
 		$ppn = $row_pro->ppn;
         $ttl_ppn = @($ttl_pemb * $ppn / 100);
         $ttl_ppn_pem = $ttl_pemb + $ttl_ppn;
+		if ($ppn!=0){
 		?>
 		<tr>
 			<td colspan="4">Pajak(PPN)10%</td>
-			<td> = Rp. </td>
+			<td>=Rp. </td>
 			<td style="text-align:right"><?= number_format($ttl_ppn, 0, ',', '.'); ?></td>
 		</tr>
+		<?php } ?>
 		<tr><td colspan="6">---------------------------------------------------------</td></tr>
 		<tr>
 			<td colspan="4">Total Bayar</td>
-			<td> = Rp. </td>
+			<td>=Rp. </td>
 			<td style="text-align:right"><?= number_format($ttl_ppn_pem, 0, ',', '.'); ?></td>
+		</tr>
+		<tr>
+			<td colspan="4">Tunai</td>
+			<td>=Rp. </td>
+			<td style="text-align:right"><?= number_format($row_ord->tunai, 0, ',', '.'); ?></td>
+		</tr>
+		<tr>
+			<td colspan="4">Kembali</td>
+			<td>=Rp. </td>
+			<td style="text-align:right"><?= number_format($row_ord->tunai-$ttl_ppn_pem, 0, ',', '.'); ?></td>
 		</tr>
 		<tr><td colspan="6">---------------------------------------------------------</td></tr>
 		</table>

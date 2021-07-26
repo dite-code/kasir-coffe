@@ -1,5 +1,5 @@
 <?php
-	echo $order_meja->kode_order;
+	//echo $order_meja->kode_order;
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +21,7 @@
 				<button class="btn btn-outline-warning" onclick="window.history.back()">Kembali</button>
 				<!--
 					<form class="d-flex">		
-					<button class="btn btn-outline-success" type="submit">Simpan</button>
+					<button class="btn btn-outline-success" type="submit" onclick="">Print</button>
 					</form>
 				-->
 			</div>
@@ -62,11 +62,15 @@
 							
 							<div class="col">
 								<div class="card">
-									<img src="<?= base_url(); ?>assets/img/menu/<?= $row->foto; ?>" class="card-img-top" alt="...">
+									<?php if ($row->foto != '') { ?>
+										<img src="<?= base_url(); ?>assets/img/menu/<?= $row->foto; ?>" class="card-img-top" alt="...">
+									<?php } else { ?>
+										<img src="<?= base_url(); ?>assets/img/keranjang.png" class="card-img-top" alt="...">
+									<?php } ?>
 									<div class="card-body">
 										<h5 class="card-title"><?= $row->nama_menu; ?></h5>
 									<p class="card-text"><?= number_format($ttl_harga, 0, ',', '.'); ?></li></p>
-									<button type="button" class="btn btn-primary btn-lg col-12" onclick="simpanTrans('<?= $row->kode_menu; ?>','<?= $order_meja->kode_order; ?>','<?= $no_meja; ?>')">Tambah</button>
+									<button type="button" class="btn btn-primary btn-lg col-12" onclick="simpanTrans('<?= $row->kode_menu; ?>','<?= $order_meja->kode_order; ?>','<?= $no_meja; ?>','<?= $row->nama_menu; ?>')">Tambah</button>
 								</div>
 							</div>
 						</div>
@@ -95,7 +99,7 @@
 <script>
 	load_tbl_menu('<?= $order_meja->kode_order; ?>');
 	
-	function simpanTrans(kode_menu,kode_order,no_meja) {
+	function simpanTrans(kode_menu,kode_order,no_meja,nama_menu) {
         
 		var posting = $.post('<?= base_url() ?>index.php/transaksi/Trans_order/insertMenuTrans', {
             kode_order: kode_order,
@@ -108,6 +112,7 @@
             load_tbl_menu(kode_order);
 			//            window.location.reload();
 		});
+		Android.alert(nama_menu+' Ditambahan');
 	}
 	
 	function load_tbl_menu(kode_order) {

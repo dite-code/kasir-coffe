@@ -214,7 +214,8 @@ echo $javasc
         rules: {
             kode_menu: {required: true},
             nama_menu: {required: true},
-            harga_menu: {required: true}
+            harga_menu: {required: true},
+            satuan: {required: true}
         },
         submitHandler: function (form) {
             var ket = $('#ket').val();

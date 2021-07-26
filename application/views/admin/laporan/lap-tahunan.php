@@ -48,7 +48,7 @@
 	<tr>
 		<th width="50">No</th>
 		<th width="200">Tanggal</th>
-		<th>Pembayaran</th>
+		<th>Pendapatan</th>
 		<th>Pajak</th>
 		<th>Pengeluaran</th>
 		<th>Total</th>
@@ -70,7 +70,7 @@
 			<td style="padding-right:5px;" align="right"><?= number_format($row->ttl_pembayaran, 0, ',', '.'); ?></td>
 			<td style="padding-right:5px;" align="right"><?= number_format($ppn, 0, ',', '.'); ?></td>
 			<td style="padding-right:5px;" align="right"><?= number_format($row->ttl_belanja, 0, ',', '.'); ?></td>
-			<td style="padding-right:5px;" align="right"><?= number_format($row->ttl_pembayaran+$ppn, 0, ',', '.'); ?></td>
+			<td style="padding-right:5px;" align="right"><?= number_format($row->ttl_pembayaran+$ppn-$row->ttl_belanja, 0, ',', '.'); ?></td>
 		</tr>
 		
 		<?php 
@@ -81,7 +81,7 @@
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb, 0, ',', '.'); ?></td>
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_ppn, 0, ',', '.'); ?></td>
 		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pengeluaran, 0, ',', '.'); ?></td>
-		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb+$ttl_ppn, 0, ',', '.'); ?></td>
+		<td style="padding-right:5px;" align="right"><?= number_format($ttl_pemb+$ttl_ppn-$ttl_pengeluaran, 0, ',', '.'); ?></td>
 	</tr>
 </table>
 <?php
